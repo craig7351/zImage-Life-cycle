@@ -1,0 +1,5 @@
+{
+  "name": "Lifetime: 4 to 80",
+  "description": "An elegant, interactive timeline to showcase 17 photos representing a life journey from age 4 to 80, utilizing object URLs for image rendering.",
+  "requestFramePermissions": []
+}
