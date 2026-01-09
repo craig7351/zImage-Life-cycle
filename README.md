@@ -2,6 +2,8 @@
 
 這是一個使用 React 與 Vite 構建的生命旅程視覺化專案，展示了從 4 歲到 80 歲的人生里程碑。
 
+🔗 **線上展示**: [https://craig7351.github.io/zImage-Life-cycle/](https://craig7351.github.io/zImage-Life-cycle/)
+
 ## 功能特色
 - **生命時間軸**：以直觀的方式展示人生不同階段的重要時刻。
 - **響應式設計**：適配各種裝置螢幕。
@@ -35,20 +37,28 @@
 ## 使用方式
 
 ### 本地開發
-啟動開發伺服器：
 ```bash
 npm run dev
 ```
 
 ### 建置專案
-建置生產環境版本：
 ```bash
 npm run build
 ```
 
-## 部署
-本專案已配置為可部署至 GitHub Pages。
-建置後的檔案位於 `dist` 目錄。
+## 部署至 GitHub Pages
+
+本專案使用 GitHub Actions 自動部署至 GitHub Pages。
+
+### 自動部署
+1. Push 程式碼到 `main` 分支
+2. GitHub Actions 會自動執行建置與部署
+3. 部署完成後即可透過上方連結訪問
+
+### 手動設定
+1. 前往 GitHub Repository → Settings → Pages
+2. Source 選擇 **GitHub Actions**
+3. Push 任何變更到 `main` 分支即可觸發部署
 
 ## 授權
 [MIT](LICENSE)
