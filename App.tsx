@@ -52,7 +52,7 @@ function App() {
                 <span className="text-[10px] uppercase tracking-widest font-medium">Generation Prompt</span>
               </div>
               <p className="font-serif text-sepia-800 text-lg leading-relaxed">
-                "{activeEvent.prompt}"
+                {activeEvent.prompt}
               </p>
             </div>
           </div>
