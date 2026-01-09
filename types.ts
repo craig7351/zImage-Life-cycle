@@ -5,6 +5,7 @@ export interface TimelineEvent {
   title: string;
   description: string;
   imageUrl: string;
+  prompt: string;
 }
 
 export interface EraContext {

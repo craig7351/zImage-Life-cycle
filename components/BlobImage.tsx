@@ -6,46 +6,22 @@ interface BlobImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 const BlobImage: React.FC<BlobImageProps> = ({ src, className, alt, ...props }) => {
-  const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let active = true;
-    let currentUrl: string | null = null;
-
-    const loadImage = async () => {
-      try {
-        setError(false);
-        // Fetch the local file
-        const response = await fetch(src);
-        if (!response.ok) {
-          throw new Error(`Failed to load image: ${response.statusText}`);
-        }
-        
-        // Convert response to Blob
-        const blob = await response.blob();
-        
-        if (active) {
-          // Create an Object URL for the blob
-          currentUrl = URL.createObjectURL(blob);
-          setBlobUrl(currentUrl);
-        }
-      } catch (err) {
-        console.error(`Error loading image ${src}:`, err);
-        if (active) setError(true);
-      }
-    };
-
-    loadImage();
-
-    // Cleanup: Revoke the Object URL to free memory when component unmounts or src changes
-    return () => {
-      active = false;
-      if (currentUrl) {
-        URL.revokeObjectURL(currentUrl);
-      }
-    };
+    setError(false);
+    setLoading(true);
   }, [src]);
+
+  const handleError = () => {
+    setLoading(false);
+    setError(true);
+  };
+
+  const handleLoad = () => {
+    setLoading(false);
+  };
 
   if (error) {
     return (
@@ -56,15 +32,23 @@ const BlobImage: React.FC<BlobImageProps> = ({ src, className, alt, ...props }) 
     );
   }
 
-  if (!blobUrl) {
-    return (
-      <div className={`flex items-center justify-center bg-sepia-100 text-sepia-800/20 ${className}`}>
-        <Loader2 className="w-6 h-6 animate-spin" />
-      </div>
-    );
-  }
-
-  return <img src={blobUrl} alt={alt} className={className} {...props} />;
+  return (
+    <div className={`relative ${className}`}>
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-sepia-100/50">
+          <Loader2 className="w-6 h-6 animate-spin text-sepia-800/20" />
+        </div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover ${loading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        onLoad={handleLoad}
+        onError={handleError}
+        {...props}
+      />
+    </div>
+  );
 };
 
 export default BlobImage;
