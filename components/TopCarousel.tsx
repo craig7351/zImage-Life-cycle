@@ -44,10 +44,10 @@ const TopCarousel: React.FC<TopCarouselProps> = ({ events, onEventChange }) => {
           </div>
 
           {/* Foreground Layer: Contained image to show full content without cropping */}
-          <div className="absolute inset-0 flex items-center justify-center p-4">
+          <div className="absolute inset-0 flex items-center justify-center">
             <BlobImage
               src={event.imageUrl}
-              className="max-w-full max-h-full w-auto h-auto object-contain drop-shadow-2xl"
+              className="h-full w-auto object-contain drop-shadow-2xl"
               alt={event.title}
             />
           </div>
